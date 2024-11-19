@@ -1,0 +1,76 @@
+2024-11-17 20:21:35,229 INFO sniffles.main (630790): Running Sniffles2, build 2.4
+2024-11-17 20:21:35,229 INFO sniffles.main (630790):   Run Mode: call_sample
+2024-11-17 20:21:35,229 INFO sniffles.main (630790):   Start on: 2024/11/17 20:21:35
+2024-11-17 20:21:35,229 INFO sniffles.main (630790):   Working dir: /share/dennislab/databases/data/PB907/PB907_01_ASPC_Human_cell_merged_RevioData/sniffles_results
+2024-11-17 20:21:35,229 INFO sniffles.main (630790):   Used command: /home/nsabzwar/.conda/envs/sniffles_env/bin/sniffles --input ../ASPC_merged_human_reads.bam --vcf output.vcf
+2024-11-17 20:21:35,229 INFO sniffles.main (630790): ==============================
+2024-11-17 20:21:35,307 INFO sniffles.main (630790): Opening for reading: ../ASPC_merged_human_reads.bam
+2024-11-17 20:21:35,357 INFO sniffles.main (630790): Opening for writing: output.vcf (single-sample, sorted)
+2024-11-17 20:21:35,365 INFO sniffles.main (630790): 
+2024-11-17 20:21:35,365 INFO sniffles.main (630790): Analyzing 12392836 alignments total...
+2024-11-17 20:21:35,365 INFO sniffles.main (630790): 
+2024-11-17 20:21:35,365 INFO sniffles.worker (630790): Starting worker 0
+2024-11-17 20:21:35,370 INFO sniffles.worker (630790): Starting worker 1
+2024-11-17 20:21:35,372 INFO sniffles.worker (630790): Starting worker 2
+2024-11-17 20:21:35,374 INFO sniffles.worker (630790): Starting worker 3
+2024-11-17 20:21:35,376 INFO sniffles.worker (630790): Dispatched task #0 to worker 0 (24  tasks left)
+2024-11-17 20:21:35,376 INFO sniffles.worker (630790): Dispatched task #1 to worker 1 (23  tasks left)
+2024-11-17 20:21:35,376 INFO sniffles.worker (630790): Dispatched task #2 to worker 2 (22  tasks left)
+2024-11-17 20:21:35,376 INFO sniffles.worker (630790): Dispatched task #3 to worker 3 (21  tasks left)
+2024-11-17 20:22:17,596 INFO sniffles.worker (630790): Worker 3 got result for task #3
+2024-11-17 20:22:17,727 INFO sniffles.worker (630790): Dispatched task #4 to worker 3 (20  tasks left)
+2024-11-17 20:22:19,551 INFO sniffles.worker (630790): Worker 2 got result for task #2
+2024-11-17 20:22:19,682 INFO sniffles.worker (630790): Dispatched task #5 to worker 2 (19  tasks left)
+2024-11-17 20:22:36,410 INFO sniffles.worker (630790): Worker 0 got result for task #0
+2024-11-17 20:22:36,541 INFO sniffles.worker (630790): Dispatched task #6 to worker 0 (18  tasks left)
+2024-11-17 20:22:53,162 INFO sniffles.worker (630790): Worker 1 got result for task #1
+2024-11-17 20:22:53,293 INFO sniffles.worker (630790): Dispatched task #7 to worker 1 (17  tasks left)
+2024-11-17 20:22:58,232 INFO sniffles.worker (630790): Worker 2 got result for task #5
+2024-11-17 20:22:58,363 INFO sniffles.worker (630790): Dispatched task #8 to worker 2 (16  tasks left)
+2024-11-17 20:23:17,111 INFO sniffles.worker (630790): Worker 3 got result for task #4
+2024-11-17 20:23:17,241 INFO sniffles.worker (630790): Dispatched task #9 to worker 3 (15  tasks left)
+2024-11-17 20:23:20,038 INFO sniffles.worker (630790): Worker 1 got result for task #7
+2024-11-17 20:23:20,170 INFO sniffles.worker (630790): Dispatched task #10 to worker 1 (14  tasks left)
+2024-11-17 20:23:25,541 INFO sniffles.worker (630790): Worker 2 got result for task #8
+2024-11-17 20:23:25,672 INFO sniffles.worker (630790): Dispatched task #11 to worker 2 (13  tasks left)
+2024-11-17 20:23:38,742 INFO sniffles.worker (630790): Worker 0 got result for task #6
+2024-11-17 20:23:38,873 INFO sniffles.worker (630790): Dispatched task #12 to worker 0 (12  tasks left)
+2024-11-17 20:24:03,513 INFO sniffles.worker (630790): Worker 1 got result for task #10
+2024-11-17 20:24:03,644 INFO sniffles.worker (630790): Dispatched task #13 to worker 1 (11  tasks left)
+2024-11-17 20:24:08,445 INFO sniffles.worker (630790): Worker 2 got result for task #11
+2024-11-17 20:24:08,577 INFO sniffles.worker (630790): Dispatched task #14 to worker 2 (10  tasks left)
+2024-11-17 20:24:09,021 INFO sniffles.worker (630790): Worker 3 got result for task #9
+2024-11-17 20:24:09,152 INFO sniffles.worker (630790): Dispatched task #15 to worker 3 (9  tasks left)
+2024-11-17 20:24:16,300 INFO sniffles.worker (630790): Worker 0 got result for task #12
+2024-11-17 20:24:16,431 INFO sniffles.worker (630790): Dispatched task #16 to worker 0 (8  tasks left)
+2024-11-17 20:24:28,268 INFO sniffles.worker (630790): Worker 1 got result for task #13
+2024-11-17 20:24:28,399 INFO sniffles.worker (630790): Dispatched task #17 to worker 1 (7  tasks left)
+2024-11-17 20:24:28,559 INFO sniffles.worker (630790): Worker 3 got result for task #15
+2024-11-17 20:24:28,690 INFO sniffles.worker (630790): Dispatched task #18 to worker 3 (6  tasks left)
+2024-11-17 20:24:29,806 INFO sniffles.worker (630790): Worker 2 got result for task #14
+2024-11-17 20:24:29,937 INFO sniffles.worker (630790): Dispatched task #19 to worker 2 (5  tasks left)
+2024-11-17 20:24:40,755 INFO sniffles.worker (630790): Worker 0 got result for task #16
+2024-11-17 20:24:40,886 INFO sniffles.worker (630790): Dispatched task #20 to worker 0 (4  tasks left)
+2024-11-17 20:24:41,299 INFO sniffles.worker (630790): Worker 0 got result for task #20
+2024-11-17 20:24:41,430 INFO sniffles.worker (630790): Dispatched task #21 to worker 0 (3  tasks left)
+2024-11-17 20:24:45,398 INFO sniffles.worker (630790): Worker 3 got result for task #18
+2024-11-17 20:24:45,529 INFO sniffles.worker (630790): Dispatched task #22 to worker 3 (2  tasks left)
+2024-11-17 20:24:46,114 INFO sniffles.worker (630790): Worker 1 got result for task #17
+2024-11-17 20:24:46,244 INFO sniffles.worker (630790): Dispatched task #23 to worker 1 (1  tasks left)
+2024-11-17 20:24:53,011 INFO sniffles.worker (630790): Worker 2 got result for task #19
+2024-11-17 20:24:53,142 INFO sniffles.worker (630790): Dispatched task #24 to worker 2 (0  tasks left)
+2024-11-17 20:24:53,968 INFO sniffles.worker (630790): Worker 0 got result for task #21
+2024-11-17 20:24:54,099 INFO sniffles.worker (630790): Worker 0 shutting down...
+2024-11-17 20:24:54,110 INFO sniffles.worker (630790): Worker 2 got result for task #24
+2024-11-17 20:24:54,230 INFO sniffles.worker (630790): Worker 2 shutting down...
+2024-11-17 20:24:55,915 INFO sniffles.worker (630790): Worker 1 got result for task #23
+2024-11-17 20:24:56,025 INFO sniffles.worker (630790): Worker 1 shutting down...
+2024-11-17 20:24:56,921 INFO sniffles.worker (630790): Worker 3 got result for task #22
+2024-11-17 20:24:57,022 INFO sniffles.worker (630790): Worker 3 shutting down...
+2024-11-17 20:24:57,022 INFO sniffles.worker (630790): Worker 0 done (code 0).
+2024-11-17 20:24:57,022 INFO sniffles.worker (630790): Worker 1 done (code 0).
+2024-11-17 20:24:57,022 INFO sniffles.worker (630790): Worker 2 done (code 0).
+2024-11-17 20:24:57,039 INFO sniffles.worker (630790): Worker 3 done (code 0).
+2024-11-17 20:24:57,039 INFO sniffles.main (630790): Took 201.67s.
+2024-11-17 20:24:57,039 INFO sniffles.main (630790): 
+2024-11-17 20:24:57,513 INFO sniffles.main (630790): Wrote 30879 called SVs to output.vcf (single-sample, sorted)
