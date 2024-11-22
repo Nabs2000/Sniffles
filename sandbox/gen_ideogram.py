@@ -94,3 +94,7 @@ def main():
     # Parse the VCF and plot
     data = parse_vcf(vcf_file)
     plot_ideogram(data, chromosome_lengths)
+
+
+if __name__ == "__main__":
+    main()

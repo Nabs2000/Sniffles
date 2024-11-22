@@ -36,3 +36,7 @@ def main():
 
     # Display the first few rows to understand the structure
     print(vcf_df.head())
+
+
+if __name__ == "__main__":
+    main()
