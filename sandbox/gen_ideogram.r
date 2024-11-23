@@ -1,88 +1,85 @@
-# Install karyoploteR
-if (!requireNamespace("karyoploteR", quietly = TRUE)) {
-    BiocManager::install("karyoploteR")
-}
+# # Load necessary libraries
+# if (!requireNamespace("VariantAnnotation", quietly = TRUE)) {
+#     install.packages("BiocManager")
+#     BiocManager::install("VariantAnnotation")
+# }
+# if (!requireNamespace("karyoploteR", quietly = TRUE)) {
+#     BiocManager::install("karyoploteR")
+# }
+# if (!requireNamespace("BSgenome.Hsapiens.UCSC.hs1", quietly = TRUE)) {
+#     BiocManager::install("BSgenome.Hsapiens.UCSC.hs1")
+# }
 
-# Install VariantAnnotation for parsing VCF
-if (!requireNamespace("VariantAnnotation", quietly = TRUE)) {
-    BiocManager::install("VariantAnnotation")
-}
-
-# Load libraries
-library(BiocManager)
-# remove.packages("BSgenome.Hsapiens.NCBI.T2T.CHM13v2.0")
-install("BSgenome.Hsapiens.UCSC.hs1")
-library(karyoploteR)
 library(VariantAnnotation)
+library(karyoploteR)
+library(BSgenome.Hsapiens.UCSC.hs1)
 
-# Load your VCF file
+# # Load your VCF file
 vcf_file <- "C:/dev/Sniffles/ASPC-1_results/output.vcf"
 vcf <- readVcf(vcf_file)
 
-# Extract the necessary fields
-chrom <- as.character(seqnames(rowRanges(vcf))) # Chromosomes
-# Remove "chr" prefix and capitalize "x" or "y"
-# chrom <- gsub("^chr", "", chrom, ignore.case = TRUE)
-# chrom <- toupper(chrom) # Ensure "x" becomes "X", etc.
+# Extract structural variant information
+info <- info(vcf)
+svtypes <- as.character(info$SVTYPE) # Extract SVTYPE field
+chromosomes <- as.character(seqnames(rowRanges(vcf))) # Extract chromosome names
+positions <- start(rowRanges(vcf)) # Extract start positions
+ends <- positions + abs(info$SVLEN) # Extract end positions
+strands <- info$STRAND # Extract strands
 
-start <- start(rowRanges(vcf)) # Start positions
-info <- info(vcf) # INFO fields
+# Filter valid SVs
+valid_indices <- !is.na(svtypes) & !is.na(positions) & !is.na(ends)
+chromosomes <- chromosomes[valid_indices]
+positions <- positions[valid_indices]
+ends <- ends[valid_indices]
+svtypes <- svtypes[valid_indices]
+strands <- strands[valid_indices]
 
-# Extract SVTYPE and SVLEN
-svtype <- info$SVTYPE
-svlen <- info$SVLEN
-
-# Create a data frame for the variants
-variants <- data.frame(
-    chrom = chrom,
-    start = start,
-    svtype = svtype,
-    svlen = svlen,
-    stringsAsFactors = FALSE
+# Create a GRanges object for SVs
+sv_ranges <- GRanges(
+    seqnames = chromosomes,
+    ranges = IRanges(start = positions, end = ends),
+    svtype = svtypes
 )
 
-# Save the plot to a PNG file
-png("C:/dev/Sniffles/ASPC-1_results/ideogram.png", width = 1200, height = 600)
-
-# Initialize the karyotype plot
-kp <- plotKaryotype(genome = "hs1")
-
-# Add structural variants
-colors <- c(DEL = "red", INS = "blue", DUP = "orange", INV = "green")
-for (type in unique(variants$svtype)) {
-    subset_variants <- variants[variants$svtype == type, ]
-
-    # Calculate end positions for each variant
-    end_positions <- subset_variants$start + subset_variants$svlen
-
-    # Use `kpSegments()` to overlay lines directly on chromosomes
-    kpSegments(
-        kp,
-        chr = subset_variants$chrom,
-        x0 = subset_variants$start, # Start position
-        x1 = end_positions, # End position
-        y0 = 0, # Align with chromosome
-        y1 = 0, # Align with chromosome
-        col = colors[type], # Color based on SVTYPE
-        lwd = 2 # Line width
+# Define color coding for each SV type
+sv_colors <- ifelse(sv_ranges$svtype == "DEL", "red",
+    ifelse(sv_ranges$svtype == "INS", "blue",
+        ifelse(sv_ranges$svtype == "DUP", "yellow",
+            ifelse(sv_ranges$svtype == "INV", "green", "gray")
+        )
     )
+) # Default to gray for others
+
+# Sort the GRanges object by chromosome and start position
+sv_ranges <- sv_ranges[order(seqnames(sv_ranges), start(sv_ranges))]
+
+# Plot the karyotype with properly ordered SVs
+output_file <- "C:/dev/Sniffles/ASPC-1_results/ideogram_with_SVs_corrected.png"
+png(output_file, width = 1200, height = 600)
+
+kp <- plotKaryotype(genome = "BSgenome.Hsapiens.UCSC.hs1", chromosomes = "all") # Use hs1 genome
+# Add vertical lines at 5000 bp intervals for each chromosome
+interval <- 5000000 # 5000 bp intervals
+for (chr in unique(as.character(seqnames(sv_ranges)))) {
+    chr_length <- seqlengths(BSgenome.Hsapiens.UCSC.hs1)[chr] # Get chromosome length
+    print("Chromosome:")
+    print(chr)
+    print("Length:")
+    print(chr_length)
+    positions <- seq(0, chr_length, by = interval) # Generate positions at 5000 bp intervals
+    kpSegments(kp, chr = chr, x0 = positions, x1 = positions, y0 = 0, y1 = 1, col = "black", lty = 2)
 }
 
+kpPlotRegions(kp, data = sv_ranges, col = sv_colors) # Add color-coded regions
 
+# Add a title
+kpAddMainTitle(kp, "Structural Variants in ASPC-1 Genome (Corrected)")
 
-# Add legend, chromosome names, and title
-legend("topright", legend = names(colors), col = colors, pch = 16, cex = 0.8, title = "SV Types")
-kpAddChromosomeNames(kp)
-kpAddMainTitle(kp, "My Karyotype Plot")
+# Add a legend
+legend_labels <- c("Deletion (DEL)", "Insertion (INS)", "Duplication (DUP)", "Inversion (INV)", "Other")
+legend_colors <- c("red", "blue", "green", "purple", "gray")
 
-# Close the device
+legend("topright", legend = legend_labels, col = legend_colors, pch = 16, cex = 0.8, title = "SV Types")
+
 dev.off()
-
-# Retrieve genome information
-# genome_data <- getGenomeAndMask(genome = "hs1")
-
-# # Extract chromosome names and lengths
-# chromosome_lengths <- as.data.frame(seqinfo(genome_data$genome))
-
-# # Print the lengths of the chromosomes
-# print(chromosome_lengths)
+cat("Karyotype plot with legend saved to:", output_file, "\n")
